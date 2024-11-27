@@ -1,7 +1,14 @@
 import React from 'react'
+import Tasks from './Tasks';
 
-function Selectedproject({project}) {
-    const formattedDate = new Date(project.dueDate).toLocaleDateString("en-US");
+function Selectedproject({
+  project,
+  tasks,
+  onDelete,
+  onAddTask,
+  onDeletetask,
+}) {
+  const formattedDate = new Date(project.dueDate).toLocaleDateString("en-US");
   return (
     <div className="w-[35rem] mt-16">
       <header className="pb-4 mb-4 border-b-2 border-stone-300">
@@ -9,7 +16,10 @@ function Selectedproject({project}) {
           <h1 className="text-3xl font-bold text-stone-600 mb-2">
             {project.title}
           </h1>
-          <button className="text-stone-600 hover:text-stone-950">
+          <button
+            onClick={onDelete}
+            className="text-stone-600 hover:text-stone-950"
+          >
             Delete
           </button>
         </div>
@@ -18,6 +28,7 @@ function Selectedproject({project}) {
           {project.description}
         </p>
       </header>
+      <Tasks tasks={tasks} onAdd={onAddTask} onDelete={onDeletetask} />
     </div>
   );
 }
